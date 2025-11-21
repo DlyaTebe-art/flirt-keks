@@ -1,0 +1,8 @@
+services:
+  bot:
+    build: .
+    container_name: tg-ads-bot
+    restart: always
+    env_file: .env
+    volumes:
+      - ./:/app
