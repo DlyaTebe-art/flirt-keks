@@ -4,6 +4,10 @@ from dotenv import load_dotenv
 
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
+from database import init_db
+
+async def main():
+    await init_db()
 
 # завантажуємо .env
 load_dotenv()
@@ -28,3 +32,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
