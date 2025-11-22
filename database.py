@@ -1,13 +1,21 @@
+import os
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy import Column, Integer, String, Text, DateTime
 from datetime import datetime
-import os
 
-DATABASE_URL = os.getenv("DATABASE_URL").replace("postgres://", "postgresql+asyncpg://")
+raw_url = os.getenv("DATABASE_URL")
+
+if raw_url.startswith("postgres://"):
+    DATABASE_URL = raw_url.replace("postgres://", "postgresql+asyncpg://")
+elif raw_url.startswith("postgresql://"):
+    DATABASE_URL = raw_url.replace("postgresql://", "postgresql+asyncpg://")
+else:
+    DATABASE_URL = raw_url
 
 engine = create_async_engine(DATABASE_URL, echo=False)
 SessionLocal = async_sessionmaker(engine, expire_on_commit=False)
+
 
 
 class Base(DeclarativeBase):
