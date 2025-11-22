@@ -3,5 +3,3 @@ asyncpg
 SQLAlchemy==2.0.23
 alembic
 python-dotenv
-psycopg2-binary
-aiofiles
